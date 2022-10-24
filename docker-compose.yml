@@ -70,6 +70,8 @@ services:
       - 9696:9696
     image: stefanwalther/speedtest-exporter
     restart: unless-stopped
+    command:
+      - '--secure'
     networks:
       - back-tier
 
