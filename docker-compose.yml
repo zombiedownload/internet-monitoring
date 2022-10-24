@@ -65,10 +65,10 @@ services:
     tty: true
     stdin_open: true
     expose:
-      - 9696
+      - 9469
     ports:
-      - 9696:9696
-    image: stefanwalther/speedtest-exporter
+      - 9469:9469
+    image: billimek/prometheus-speedtest-exporter:latest
     restart: unless-stopped
     networks:
       - back-tier
