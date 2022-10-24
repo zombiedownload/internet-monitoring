@@ -33,14 +33,14 @@ scrape_configs:
     params:
       script: [speedtest]
     static_configs:
-      - targets: ['localhost:9469']
+      - targets: ['speedtest:9469']
     scrape_interval: 5m
     scrape_timeout: 90s
   
   - job_name: 'script_exporter'
     metrics_path: /metrics
     static_configs:
-      - targets: ['localhost:9469']
+      - targets: ['speedtest:9469']
 
   - job_name: 'ping'
     metrics_path: /probe
