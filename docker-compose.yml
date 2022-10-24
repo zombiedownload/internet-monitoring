@@ -10,13 +10,15 @@ networks:
 
 services:
   prometheus:
-    image: prom/prometheus:v2.0.0
+    image: prom/prometheus:v2.25.2
+    restart: unless-stopped
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=90d'
       - '--web.console.libraries=/usr/share/prometheus/console_libraries'
       - '--web.console.templates=/usr/share/prometheus/consoles'
     ports:
@@ -29,6 +31,7 @@ services:
 
   grafana:
     image: grafana/grafana
+    restart: unless-stopped
     volumes:
       - grafana_data:/var/lib/grafana
       - ./grafana/provisioning/:/etc/grafana/provisioning/
@@ -50,6 +53,7 @@ services:
     ports:
       - 9115:9115
     image: prom/blackbox-exporter
+    restart: unless-stopped
     volumes:
       - ./blackbox/config:/config
     command:
@@ -65,32 +69,20 @@ services:
     ports:
       - 9696:9696
     image: stefanwalther/speedtest-exporter
-    restart: always
+    restart: unless-stopped
     networks:
       - back-tier
-
-  sonos:
-    tty: true
-    stdin_open: true
-    expose: 
-      - 1915
-    ports:
-      - 1915:1915
-    image: maxandersen/sonos_exporter
-    command:
-      - '--address=0.0.0.0:1915'
-    network_mode: host
 
   nodeexp:
     privileged: true
     image: prom/node-exporter
+    restart: unless-stopped
     volumes:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /:/rootfs:ro
     ports:
       - 9100:9100
-    restart: always
     command:
       - '--path.procfs=/host/proc'
       - '--path.sysfs=/host/sys'
