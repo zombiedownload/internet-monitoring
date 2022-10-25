@@ -3,4 +3,4 @@
     - http://github.com;github.com;external;internetbox
     - https://www.apple.com/;apple.com;external;internetbox
     - https://www.cnn.com;cnn.com;external;internetbox
-    - http://192.168.1.1;router;local;internetbox
+    - http://192.168.1.1;router;external;internetbox
