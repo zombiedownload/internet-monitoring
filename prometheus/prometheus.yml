@@ -34,7 +34,7 @@ scrape_configs:
       script: [speedtest]
     static_configs:
       - targets: ['speedtest:9469']
-    scrape_interval: 5m
+    scrape_interval: 45m
     scrape_timeout: 90s
   
   - job_name: 'script_exporter'
