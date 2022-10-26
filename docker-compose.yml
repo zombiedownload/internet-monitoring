@@ -46,8 +46,8 @@ services:
       - front-tier
  
   ping:
-    tty: true
-    stdin_open: true
+    #tty: true
+    #stdin_open: true
     expose:
       - 9115
     ports:
@@ -62,8 +62,8 @@ services:
       - back-tier
 
   speedtest:
-    tty: true
-    stdin_open: true
+    #tty: true
+    #stdin_open: true
     expose:
       - 9469
     ports:
